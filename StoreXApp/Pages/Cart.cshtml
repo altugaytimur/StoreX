@@ -1,0 +1,83 @@
+﻿@page "/cart"
+
+@model CartModel
+
+<div>
+    <div class="text-center display-6">
+        Cart
+    </div>
+
+    <table >
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Cart?.Lines ?? Enumerable.Empty<CartLine>())
+            {
+                <tr>
+                    <td>@item.Product.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Product.Price.ToString("c")</td>
+                    <td>@((item.Product.Price * item.Quantity).ToString("c2"))</td>
+                    <td>
+                        <div class="btn btn-group">
+                            <form method="post" asp-page-handler="Remove">
+                                <input type="hidden" name="id" value="@item.Product.Id" />
+                                <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                                <button type="submit" class="btn btn-sm btn-danger mx-2 ">
+                                    <i class="bi bi-trash-fill"></i>
+                                    Remove
+                                   
+                                </button>
+                            </form>
+
+                            <form asp-page-handler="Clear" method="post">
+
+                                <input type="hidden" name="ProductId" value="@item.Product.Id" />
+                                <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+
+                                <button style="border-radius:50px" type="submit" class="btn btn-sm  btn-outline-success">
+                                    <i class="bi bi-bag-dash-fill"></i>
+                                </button>
+                            </form>
+                            <button style="border-radius:50px" class="btn btn-sm btn-success" disabled data-bs-toggle="button">
+                                <i class="bi bi-cart"></i>
+                                @item.Quantity
+                            </button>
+                            <form id="@item.Product.Id" asp-page="/cart" method="post">
+
+                                <input type="hidden" name="productId" asp-for="@item.Product.Id" />
+
+                                <input type="hidden" name="returnUrl" value="/Product/Get/@item.Product.Id" />
+
+                                <button style="border-radius:50px" type="submit" class="btn btn-sm btn-outline-success ">
+                                    <i class="bi bi-bag-plus-fill"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="text-right" colspan="4">Total:</td>
+                <td class="text-right text-danger" colspan="3">
+                    @Model.Cart?.ComputeTotalValue().ToString("C2")
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="text-center my-3">
+        <div  class="btn-group">
+            <a  class="btn btn-primary" href="@Model?.ReturnUrl">Continue Shopping</a>
+            <a class="btn btn-success mx-2" asp-controller="Order" asp-action="Checkout">CheckOut</a>
+        </div>
+    </div>
+</div>

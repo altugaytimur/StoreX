@@ -1,0 +1,61 @@
+﻿@model ProductDtoForInsertion
+
+<div class="text-center">
+    <div class="display-6">Create</div>
+
+</div>
+@*enctype multipart/form-data eklememizin nedeni formun dosyaları alabilmesidir. burada binary verileri de alabileceğini belirtiyoruz*@
+<form method="post" asp-action="Create" enctype="multipart/form-data"> 
+
+    <div class="text-danger" asp-validation-summary="All"></div>
+
+    @*Categorinin statik eklenme yöntemi
+    <div class="form-group my-3">
+        <label asp-for="CategoryId"></label>
+       <select class="form-control" asp-for="CategoryId">
+           <option value="1">Book</option>
+           <option value="2">Electronic</option>
+       </select>
+    </div>*@
+
+    <div class="form-group my-3">
+        <label asp-for="CategoryId">Category</label>
+        <select class="form-control" asp-items="@ViewBag.Categories" asp-for="CategoryId" >
+        
+        </select>
+
+    </div>
+
+
+    <div class="form-group my-3">
+        <label asp-for="ProductName"></label>
+        <input asp-for="ProductName" class="form-control" />
+    </div>
+
+    <div class="form-group my-3">
+        <label asp-for="Summary"></label>
+        <input  asp-for="Summary" class="form-control" />
+    </div>
+
+    <div class="form-group my-3">
+        <label asp-for="Price"></label>
+        <input asp-for="Price" class="form-control" />
+    </div>
+
+    <div class="form-group my-3">
+        <label asp-for="ImageUrl"></label>
+        <input name="file" type="file" class="form-control" />
+    </div>
+
+    <div class="form-group my-3">
+       <div class="btn-group">
+            <button class="btn btn-primary" type="submit">
+                <i class="bi bi-floppy2-fill"></i> Save
+            </button>
+            <a asp-action="Index" class="btn btn-outline-primary">
+                <i class="bi bi-list-ul"></i> Products
+            </a>
+       </div>
+    </div>
+
+</form>

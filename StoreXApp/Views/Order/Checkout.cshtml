@@ -1,0 +1,36 @@
+﻿@model Order
+
+<div class="text-danger" asp-validation-summary="All"></div>
+<form method="post" asp-action="Checkout">
+    <div class="form-group ">
+        <div class="form-floating my-3">
+            <input class="form-control" asp-for="Name"  placeholder="name@example" />
+            <label asp-for="Name" >Enter Your Name</label>
+        </div>
+        <div class="form-floating my-3">
+            <input class="form-control" asp-for="Line1"  placeholder="name@example" />
+            <label asp-for="Line1" > Line 1</label>
+        </div>
+        <div class="form-floating my-3">
+            <input class="form-control" asp-for="Line2"  placeholder="name@example" />
+            <label asp-for="Line2" > Line 2</label>
+        </div>
+        <div class="form-floating my-3">
+            <input class="form-control" asp-for="Line3"  placeholder="name@example" />
+            <label asp-for="Line3" > Line 3</label>
+        </div>
+        <div class="form-floating my-3">
+            <input class="form-control" asp-for="City" placeholder="name@example" />
+            <label asp-for="City"> City</label>
+        </div>
+        <div >
+            <input class="btn-check-primary"  asp-for="GiftWrap"  />
+            <label> Gift Wrap these items.</label>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-success">
+                Complete Order
+            </button>
+        </div>
+    </div>
+</form>
