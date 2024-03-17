@@ -16,8 +16,6 @@ namespace StoreXApp.Infra.Extensions
                 .GetRequiredService<StoreXContext>();
             if (context.Database.GetPendingMigrations().Any())
                 context.Database.Migrate();
-          
-
         }
 
         public static void ConfigureLocalization(this WebApplication app)
@@ -53,8 +51,7 @@ namespace StoreXApp.Infra.Extensions
                 {
                     Email="altugaytimur@hotmail.com",
                     PhoneNumber="05321707878",
-                    UserName=adminUser,
-                   
+                    UserName=adminUser
                 };
                 var result = await userManager.CreateAsync(user, adminPassword);
                 if (!result.Succeeded)
@@ -62,7 +59,7 @@ namespace StoreXApp.Infra.Extensions
                 var roleResult = await userManager.AddToRolesAsync(user, 
                     roleManager
                     .Roles
-                    .Select(r => r.Name)
+                    .Select(r=>r.Name)
                     .ToList()
                 );
                 if (!roleResult.Succeeded)

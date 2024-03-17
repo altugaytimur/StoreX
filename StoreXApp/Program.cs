@@ -11,7 +11,7 @@ builder.Services.AddRazorPages();
 
 //ServiceExtension  yazarak configuration iþleminin bir metota vermiþ oluyoruz ve onu servicelere ekliyoruz.
 builder.Services.ConfigureDbContext(builder.Configuration);
-
+//Ýdentity configurationlarýný service ekliyoruz.
 builder.Services.ConfigureIdentity();
 //Session configurationlarýný service ekliyoruz.
 builder.Services.ConfigureSession();
